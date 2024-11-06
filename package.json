@@ -1,24 +1,35 @@
 {
-  "name": "ts-trabalho",
-  "version": "1.0.0",
+  "name": "nodets-trabalho",
+  "version": "2.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "@prisma/client": "^5.21.1",
-    "@types/express": "^5.0.0",
-    "express": "^4.21.1",
-    "prisma": "^5.21.1",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.6.3"
-  },
   "devDependencies": {
-    "@types/node": "^22.8.7"
+    "@rocketseat/eslint-config": "2.2.2",
+    "@types/bcryptjs": "2.4.6",
+    "@types/node": "22.9.0",
+    "eslint": "8.57.1",
+    "prisma": "5.22.0",
+    "tsup": "8.3.5",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3"
+  },
+  "dependencies": {
+    "@fastify/cors": "10.0.1",
+    "@fastify/jwt": "9.0.1",
+    "@fastify/swagger": "9.2.0",
+    "@fastify/swagger-ui": "5.1.0",
+    "@prisma/client": "5.22.0",
+    "bcryptjs": "2.4.3",
+    "dotenv": "16.4.5",
+    "fastify": "5.1.0",
+    "zod": "3.23.8"
   }
 }
