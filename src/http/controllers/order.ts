@@ -63,14 +63,14 @@ export async function updateOrder(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
+  const { id } = request.params as { id: string };
   const requestBodySchema = z.object({
-    id: z.string(),
     user_id: z.string().optional(),
     product_id: z.string().optional(),
     quantity: z.number().optional(),
   });
 
-  const { id, product_id, quantity, user_id } = requestBodySchema.parse(
+  const { product_id, quantity, user_id } = requestBodySchema.parse(
     request.body,
   );
 

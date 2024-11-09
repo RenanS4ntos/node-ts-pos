@@ -13,7 +13,11 @@ import {
   getProducts,
   updateProduct,
 } from "./controllers/product";
-import { createCategory, getCategories } from "./controllers/category";
+import {
+  createCategory,
+  getCategories,
+  updateCategory,
+} from "./controllers/category";
 import { createOrder, getOrders, updateOrder } from "./controllers/order";
 import { accountSchema } from "./schemas/accountSchema";
 import { productSchema } from "./schemas/productSchema";
@@ -34,7 +38,7 @@ export async function appRoutes(app: FastifyInstance) {
     getUserById,
   );
   app.put(
-    "/user",
+    "/user/:id",
     { onRequest: verifyJWT, schema: userSchema.updateUser },
     updateUser,
   );
@@ -55,6 +59,7 @@ export async function appRoutes(app: FastifyInstance) {
     { onRequest: verifyJWT, schema: categorySchema.createCategory },
     createCategory,
   );
+  app.put("/category/:id", { onRequest: verifyJWT }, updateCategory);
 
   // PRODUCTS
   app.get(
@@ -68,7 +73,7 @@ export async function appRoutes(app: FastifyInstance) {
     createProduct,
   );
   app.put(
-    "/product",
+    "/product/:id",
     { onRequest: verifyJWT, schema: productSchema.updateProduct },
     updateProduct,
   );
@@ -85,7 +90,7 @@ export async function appRoutes(app: FastifyInstance) {
     createOrder,
   );
   app.put(
-    "/order",
+    "/order/:id",
     { onRequest: verifyJWT, schema: orderSchema.updateOrder },
     updateOrder,
   );

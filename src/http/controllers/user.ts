@@ -73,13 +73,13 @@ export async function updateUser(request: FastifyRequest, reply: FastifyReply) {
     password: z.string().min(6).optional(),
   });
 
-  const { id, name, password } = updateBodySchema.parse(request.body);
+  const { name, password } = updateBodySchema.parse(request.body);
 
   const password_hash = password ? await hash(password, 6) : undefined;
 
   await prisma.user.update({
     where: {
-      id,
+      id: user.id,
     },
     data: {
       name,
@@ -93,15 +93,11 @@ export async function updateUser(request: FastifyRequest, reply: FastifyReply) {
 }
 
 export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
-  const requestBodySchema = z.object({
-    id: z.string(),
-  });
-
-  const { id } = requestBodySchema.parse(request.params);
+  const { id } = request.params as { id: string };
 
   await prisma.user.delete({
     where: {
-      id: id as string,
+      id,
     },
   });
 

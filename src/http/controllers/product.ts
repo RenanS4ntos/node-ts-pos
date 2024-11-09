@@ -53,15 +53,13 @@ export async function updateProduct(
   reply: FastifyReply,
 ) {
   const requestBodySchema = z.object({
-    id: z.string(),
     name: z.string().optional(),
     price: z.number().optional(),
     category_id: z.string().optional(),
   });
 
-  const { id, name, price, category_id } = requestBodySchema.parse(
-    request.body,
-  );
+  const { id } = request.params as { id: string };
+  const { name, price, category_id } = requestBodySchema.parse(request.body);
 
   const doesCategoryExist = await prisma.category.findUnique({
     where: {
