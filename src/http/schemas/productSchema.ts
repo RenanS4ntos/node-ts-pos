@@ -53,11 +53,15 @@ export const productSchema = {
     },
   },
   updateProduct: {
-    body: {
+    params: {
       type: "object",
-      required: ["id"],
       properties: {
         id: { type: "string" },
+      },
+    },
+    body: {
+      type: "object",
+      properties: {
         name: { type: "string" },
         price: { type: "number" },
       },
@@ -66,9 +70,18 @@ export const productSchema = {
       200: {
         type: "object",
         properties: {
-          id: { type: "string" },
-          name: { type: "string" },
-          price: { type: "number" },
+          message: { type: "string" },
+          data: {
+            type: "object",
+            properties: {
+              product: {
+                id: { type: "string" },
+                name: { type: "string" },
+                price: { type: "number" },
+                category_id: { type: "string" },
+              },
+            },
+          },
         },
       },
     },

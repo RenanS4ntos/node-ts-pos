@@ -61,19 +61,7 @@ export async function updateProduct(
   const { id } = request.params as { id: string };
   const { name, price, category_id } = requestBodySchema.parse(request.body);
 
-  const doesCategoryExist = await prisma.category.findUnique({
-    where: {
-      id: category_id,
-    },
-  });
-
-  if (!doesCategoryExist) {
-    return reply.status(404).send({
-      error: "Category not found",
-    });
-  }
-
-  await prisma.product.update({
+  const product = await prisma.product.update({
     where: {
       id,
     },
@@ -85,6 +73,9 @@ export async function updateProduct(
   });
 
   return reply.status(200).send({
-    message: "Product updated",
+    message: "Product updated!",
+    data: {
+      product,
+    },
   });
 }

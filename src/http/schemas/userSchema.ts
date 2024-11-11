@@ -35,10 +35,21 @@ export const userSchema = {
       200: {
         type: "object",
         properties: {
-          id: { type: "string" },
-          email: { type: "string" },
-          name: { type: "string" },
-          created_at: { type: "string", format: "date-time" },
+          user: {
+            type: "object",
+            properties: {
+              id: { type: "string" },
+              email: { type: "string" },
+              name: { type: "string" },
+              created_at: { type: "string", format: "date-time" },
+            },
+          },
+        },
+      },
+      404: {
+        type: "object",
+        properties: {
+          error: { type: "string" },
         },
       },
     },
@@ -50,11 +61,16 @@ export const userSchema = {
     },
   },
   updateUser: {
-    body: {
+    params: {
       type: "object",
-      required: ["id", "name", "email"],
+      required: ["id"],
       properties: {
         id: { type: "string" },
+      },
+    },
+    body: {
+      type: "object",
+      properties: {
         name: { type: "string" },
         email: { type: "string" },
       },
@@ -63,9 +79,21 @@ export const userSchema = {
       200: {
         type: "object",
         properties: {
-          id: { type: "string" },
-          name: { type: "string" },
-          email: { type: "string" },
+          message: { type: "string" },
+          data: {
+            type: "object",
+            properties: {
+              user: {
+                type: "object",
+                properties: {
+                  id: { type: "string" },
+                  email: { type: "string" },
+                  name: { type: "string" },
+                  created_at: { type: "string", format: "date-time" },
+                },
+              },
+            },
+          },
         },
       },
     },

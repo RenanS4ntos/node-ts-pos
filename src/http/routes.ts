@@ -18,7 +18,7 @@ import {
   getCategories,
   updateCategory,
 } from "./controllers/category";
-import { createOrder, getOrders, updateOrder } from "./controllers/order";
+import { createOrder, getOrders } from "./controllers/order";
 import { accountSchema } from "./schemas/accountSchema";
 import { productSchema } from "./schemas/productSchema";
 import { categorySchema } from "./schemas/categorySchema";
@@ -88,10 +88,5 @@ export async function appRoutes(app: FastifyInstance) {
     "/orders",
     { onRequest: verifyJWT, schema: orderSchema.createOrder },
     createOrder,
-  );
-  app.put(
-    "/order/:id",
-    { onRequest: verifyJWT, schema: orderSchema.updateOrder },
-    updateOrder,
   );
 }

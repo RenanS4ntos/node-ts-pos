@@ -55,11 +55,15 @@ export async function getUserById(
 }
 
 export async function updateUser(request: FastifyRequest, reply: FastifyReply) {
+  const { id } = request.params as { id: string };
+
   const user = await prisma.user.findUnique({
     where: {
-      id: request.user.sub,
+      id,
     },
   });
+
+  console.log(user);
 
   if (!user) {
     return reply.status(404).send({
@@ -68,7 +72,6 @@ export async function updateUser(request: FastifyRequest, reply: FastifyReply) {
   }
 
   const updateBodySchema = z.object({
-    id: z.string(),
     name: z.string(),
     password: z.string().min(6).optional(),
   });
@@ -89,6 +92,9 @@ export async function updateUser(request: FastifyRequest, reply: FastifyReply) {
 
   return reply.status(200).send({
     message: "User updated successfully",
+    data: {
+      user,
+    },
   });
 }
 
